@@ -32,6 +32,24 @@ type Mutation {
     saveBook(book: BookInput): User
 }
 
+input CreateUserInput {
+    username: String!
+    email: String!
+    password: String!
+
+}
+
+input LoginInput {
+    usernameOrEmail: String!
+    password: String!
+}
+
+input BookInput {
+    bookId: ID!
+    title: String!
+    author: String!
+}
+
 `
 
 module.exports = typeDefs;
