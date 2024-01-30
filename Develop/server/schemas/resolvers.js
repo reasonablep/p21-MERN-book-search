@@ -31,7 +31,39 @@ const resolvers = {
 
         },
 
-        
+        saveBook: async (_, {book}, context) => {
+            if (!context.user) {
+                throw new Error('Authentication required');
+
+            }
+
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: {savedBooks: book} },
+                { new: true, runValidators: true }
+
+            );
+
+            return updatedUser;
+
+        },
+
+        deleteBook: async (_, { bookId }, context) => {
+            if (!context.user) {
+                throw new Error('Authentication required');
+            }
+
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: {savedBooks: { bookId }}},
+                { new: true }
+            );
+
+            return updatedUser;
+        },
 
     },
-}
+
+};
+
+module.exports = resolvers;

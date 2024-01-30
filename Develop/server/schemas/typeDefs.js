@@ -1,6 +1,4 @@
-const { gql } = require('@apollo/server');
-
-const typeDefs = gql `
+const typeDefs =  `
 
 type User {
     _id: ID!
@@ -30,6 +28,7 @@ type Mutation {
     createUser(input: CreateUserInput): AuthPayload
     login(input: LoginInput): AuthPayload
     saveBook(book: BookInput): User
+    deleteBook(bookId: ID): User
 }
 
 input CreateUserInput {
