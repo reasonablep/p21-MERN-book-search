@@ -4,17 +4,21 @@ type User {
     _id: ID!
     username: String
     email: String!
-    savedBooks: [Book]!
+    bookCount: Int
+    savedBooks: [Book]
 }
 
 type Book {
-    bookId: ID!
+    googleBooksId: ID!
+    authors: [String!]
+    description: String!
     title: String!
-    author: String!
+    image: String
+    link: String
 
 }
 
-type AuthPayload {
+type Auth {
     token: String!
     user: User!
 }
@@ -25,10 +29,7 @@ type Query {
 }
 
 type Mutation {
-    createUser(input: CreateUserInput): AuthPayload
-    login(input: LoginInput): AuthPayload
-    saveBook(book: BookInput): User
-    deleteBook(bookId: ID): User
+    login (input: LoginInput): Auth
 }
 
 input CreateUserInput {
