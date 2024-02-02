@@ -1,6 +1,6 @@
 // import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '../queries/queries';
+import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import {
   Container,

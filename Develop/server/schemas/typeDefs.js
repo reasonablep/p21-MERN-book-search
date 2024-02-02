@@ -2,19 +2,19 @@ const typeDefs =  `
 
 type User {
     _id: ID!
-    username: String
+    username: String!
     email: String!
-    bookCount: Int
+    password: String!
     savedBooks: [Book]
 }
 
 type Book {
-    googleBooksId: ID!
-    authors: [String!]
+    authors: [String]
     description: String!
-    title: String!
+    bookId: ID!
     image: String
     link: String
+    title: String!
 
 }
 
@@ -48,7 +48,7 @@ input AddUser {
 input BookInput {
     description: String!
     title: String!
-    bookId: ID!w
+    bookId: ID!
     image: String
     link: String
 }

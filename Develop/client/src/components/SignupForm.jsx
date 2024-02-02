@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { createUser } from '../utils/API';
+// import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
@@ -33,10 +33,10 @@ const SignupForm = () => {
     try {
       const data = await addUser({variables: userFormData});
 
-      const user = data.addUser.token;
-      console.log('user');
+      const user = data.data.addUser.user;
+      const token = data.data.addUser.token;
 
-      const token = data.addUser.token;
+      console.log(user);
 
       Auth.login(token);
     } catch (err) {
