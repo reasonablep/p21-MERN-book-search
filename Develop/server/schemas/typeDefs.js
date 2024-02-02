@@ -48,8 +48,7 @@ input AddUser {
 input BookInput {
     description: String!
     title: String!
-    bookId: ID!
-    title: String!
+    bookId: ID!w
     image: String
     link: String
 }

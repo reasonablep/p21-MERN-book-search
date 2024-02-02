@@ -36,6 +36,3 @@ module.exports = {
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };
-
-
-// Emulate mini project
