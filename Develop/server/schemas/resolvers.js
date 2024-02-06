@@ -63,7 +63,6 @@ const resolvers = {
 
     throw new AuthenticationError('Must be logged in to remove a book')
 
-
 },
 
 },

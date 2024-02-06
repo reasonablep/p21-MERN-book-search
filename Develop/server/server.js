@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const db = require('./config/connection');
 const typeDefs = require('./schemas/typeDefs');
@@ -18,6 +19,7 @@ const server = new ApolloServer ({
 const StartApolloServer = async () => {
   await server.start();
 
+  app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());  
 
