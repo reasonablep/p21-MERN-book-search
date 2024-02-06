@@ -20,7 +20,7 @@ type Book {
 
 type Auth {
     token: String!
-    user: User!
+    username: String!
 }
 
 type Query {

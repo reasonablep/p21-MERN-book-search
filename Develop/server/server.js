@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-// const routes = require('./routes');
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers')
 const { ApolloServer } = require('@apollo/server');
@@ -29,8 +28,6 @@ const StartApolloServer = async () => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
-
-// app.use(routes);
 
 db.once('open', () => {
   app.listen(PORT, () => console.log(`🌍 Now listening on http://localhost:${PORT}`));
