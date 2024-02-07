@@ -14,9 +14,6 @@ const SignupForm = () => {
 
   const [addUser, {loading, error}] = useMutation(ADD_USER);
 
-  console.log('loading', loading);
-  console.log('error', error);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
