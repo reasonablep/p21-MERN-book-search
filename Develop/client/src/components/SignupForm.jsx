@@ -29,20 +29,21 @@ const SignupForm = () => {
       event.stopPropagation();
     }
 
-    try {
-      const  data  = await addUser(userFormData);
-      console.log(data);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (error) {
-      console.error('GraphQL mutation error', error);
+    const emailValidator = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValidator.test(userFormData.email)) {
       setShowAlert(true);
+      return;
+    }
+
+    try {
+      const { data }  = await addUser({variables:
+        {...userFormData}
+      });
+
+      Auth.login(data.addUser.token);
+
+    } catch (error) {
+      console.error(error);
     }
 
     setUserFormData({
