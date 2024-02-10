@@ -39,9 +39,10 @@ type Mutation {
         email: String!,
         password: String!): Auth
     saveBook (
+        bookId: ID!
+        authors: String
         description: String!
         title: String!
-        bookId: ID!
         image: String
         link: String): User
     removeBook (bookId: ID!): User
