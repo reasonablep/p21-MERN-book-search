@@ -6,8 +6,11 @@ input LoginInput {
 }
 
 input BookInput {
-    bookId: String!
+    authors: [String]
     description: String!
+    bookId: String!
+    image: String
+    link: String
     title: String!
 }
 
@@ -22,7 +25,7 @@ type User {
 type Book {
     authors: [String]
     description: String!
-    bookId: ID!
+    bookId: String!
     image: String
     link: String
     title: String!
@@ -40,12 +43,11 @@ type Query {
 
 type Mutation {
     login (input: LoginInput): Auth
-    addUser 
-        (username: String!,
+    addUser (username: String!,
         email: String!,
         password: String!): Auth
-
-        saveBook (input: BookInput!): User
+    saveBook (
+        input: BookInput!): User
     removeBook (bookId: ID!): User
 }
 

@@ -33,14 +33,15 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async (_, { input }, context) => {
+        saveBook: async (_, { input, userId }) => {
                 const { bookId, description, title } = input;
                 const updatedUser = await User.findByIdAndUpdate(
-                    context.user._id,
+                    userId,
                     { $push: { savedBooks: {bookId, description, title} } },
                     { new: true }
                 ).populate('savedBooks');
 
+                console.log(updatedUser);
                 return updatedUser;
 
     },
