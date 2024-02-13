@@ -33,8 +33,8 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async ({bookId, description, title}, context) => {
-        
+        saveBook: async (_, { input }, context) => {
+                const { bookId, description, title } = input;
                 const updatedUser = await User.findByIdAndUpdate(
                     context.user._id,
                     { $push: { savedBooks: {bookId, description, title} } },
