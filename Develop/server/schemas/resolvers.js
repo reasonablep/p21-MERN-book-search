@@ -1,10 +1,11 @@
 const { User } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
-const {  signToken } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
         me: async (_, args, context) => {
+            console.log('Context: ', context);
             if (context.user) {
                 const user = await User.findById(context.user._id).populate('savedBooks');
                 return user;
@@ -34,11 +35,12 @@ const resolvers = {
         },
 
         saveBook: async (_, { input }, context) => {
-                const { bookId, description, title } = input;
+            console.log('saveContext: ', context)
+                const { bookId, description, title, authors, image, link } = input;
                 console.log("test: ", context.user);
                 const updatedUser = await User.findByIdAndUpdate(
                     context.user._id,
-                    { $push: { savedBooks: {bookId, description, title} } },
+                    { $push: { savedBooks: {bookId, description, title, authors, image, link} } },
                     { new: true }
                 ).populate('savedBooks');
 
