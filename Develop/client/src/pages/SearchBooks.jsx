@@ -26,8 +26,6 @@ const SearchBooks = () => {
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
 
-// Am i supposed to do the above?? ** 
-
 
   useEffect(() => {
     return () => saveBookIds(savedBookIds);

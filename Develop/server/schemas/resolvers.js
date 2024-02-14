@@ -1,6 +1,6 @@
 const { User } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
-const { signToken } = require('../utils/auth');
+const {  signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -33,10 +33,11 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async (_, { input, userId }) => {
+        saveBook: async (_, { input }, context) => {
                 const { bookId, description, title } = input;
+                console.log("test: ", context.user);
                 const updatedUser = await User.findByIdAndUpdate(
-                    userId,
+                    context.user._id,
                     { $push: { savedBooks: {bookId, description, title} } },
                     { new: true }
                 ).populate('savedBooks');
