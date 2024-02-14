@@ -26,8 +26,6 @@ const SearchBooks = () => {
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
 
-// Am i supposed to do the above?? ** 
-
 
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
@@ -81,7 +79,16 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBookMutation({variables: {...bookToSave, token}});
+      const { data } = await saveBookMutation({variables: {
+        input: {
+          authors: bookToSave.authors,
+          title: bookToSave.title,
+          description: bookToSave.description,
+          bookId: bookToSave.bookId,
+          link: bookToSave.link,
+          image: bookToSave.image
+        }
+      }});
 
       if (!data.ok) {
         throw new Error('something went wrong!');

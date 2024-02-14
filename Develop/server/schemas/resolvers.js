@@ -5,7 +5,6 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         me: async (_, args, context) => {
-            console.log('Context: ', context);
             if (context.user) {
                 const user = await User.findById(context.user._id).populate('savedBooks');
                 return user;
@@ -35,16 +34,12 @@ const resolvers = {
         },
 
         saveBook: async (_, { input }, context) => {
-            console.log('saveContext: ', context)
                 const { bookId, description, title, authors, image, link } = input;
-                console.log("test: ", context.user);
                 const updatedUser = await User.findByIdAndUpdate(
                     context.user._id,
                     { $push: { savedBooks: {bookId, description, title, authors, image, link} } },
                     { new: true }
                 ).populate('savedBooks');
-
-                console.log(updatedUser);
                 return updatedUser;
 
     },
