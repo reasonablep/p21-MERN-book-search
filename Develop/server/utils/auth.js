@@ -28,7 +28,7 @@ module.exports = {
     } catch (error) {
       console.log('Invalid token', error.message);
     }
-    return { user: null, error: 'Invalid token' };
+    return { user: null, error: 'Invalid token' }
 
   },
   
