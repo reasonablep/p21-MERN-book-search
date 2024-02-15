@@ -81,21 +81,27 @@ const SearchBooks = () => {
     try {
       const { data } = await saveBookMutation({variables: {
         input: {
-          authors: bookToSave.authors,
+          authors: bookToSave.authors || 'Authors not available',
           title: bookToSave.title,
-          description: bookToSave.description,
+          description: bookToSave.description || 'No description available',
           bookId: bookToSave.bookId,
-          link: bookToSave.link,
-          image: bookToSave.image
+          link: bookToSave.link || 'No link available',
+          image: bookToSave.image || 'No image available'
         }
-      }});
+      }})
 
-      if (!data.ok) {
+      if (data) {
+
+        setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      
+      }
+
+      else {
+
         throw new Error('something went wrong!');
       }
 
-      // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+
     } catch (err) {
       console.error(err);
     }
