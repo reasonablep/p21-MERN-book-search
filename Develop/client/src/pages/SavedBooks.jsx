@@ -18,7 +18,9 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
 
 // Empty object for userData if undefined
-  const [userData, setUserData] = useState( data?.me || {savedBooks: [] });
+  // const [userData, setUserData] = useState( data?.me);
+
+  const userData = data?.me;
 
   //Remove a book
   const [deleteBookMutation] = useMutation(REMOVE_BOOK);
@@ -38,8 +40,8 @@ const SavedBooks = () => {
         variables: { bookId },
       });
 
-      const updatedUser = data.deleteBook.user;
-      setUserData(updatedUser);
+      // const updatedUser = data.deleteBook.user;
+      // setUserData(updatedUser);
 
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
@@ -62,12 +64,12 @@ const SavedBooks = () => {
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
+          {userData?.savedBooks.length
+            ? `Viewing ${userData?.savedBooks.length} saved ${userData?.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <Row>
-          {userData.savedBooks.map((book) => {
+          {userData?.savedBooks.map((book) => {
             return (
               <Col md="4">
                 <Card key={book.bookId} border='dark'>
