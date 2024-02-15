@@ -5,6 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         me: async (_, args, context) => {
+            console.log('Context: ', context);
             if (context.user) {
                 const user = await User.findById(context.user._id).populate('savedBooks');
                 return user;
@@ -26,43 +27,54 @@ const resolvers = {
 
         },
 
-        addUser: async (parent, {username, email, password}) => {
-            const user = await User.create({username, email, password});
+        addUser: async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
             const token = signToken(user);
 
             return { token, user };
         },
 
         saveBook: async (_, { input }, context) => {
-                const { bookId, description, title, authors, image, link } = input;
-                const updatedUser = await User.findByIdAndUpdate(
-                    context.user._id,
-                    { $push: { savedBooks: {bookId, description, title, authors, image, link} } },
-                    { new: true }
-                ).populate('savedBooks');
-                return updatedUser;
-
-    },
-
-    removeBook: async (_, { bookId }, context) => {
-        if (context.user) {
-
+            console.log(context);
+            const { bookId, description, title, authors, image, link } = input;
             const updatedUser = await User.findByIdAndUpdate(
                 context.user._id,
-                { $pull: { savedBooks: { bookId } } },
+                { $push: { savedBooks: { bookId, description, title, authors, image, link } } },
                 { new: true }
             ).populate('savedBooks');
-
             return updatedUser;
 
+        },
+
+        removeBook: async (_, { bookId }, context) => {
+
+            try {
+
+                if (!context.user) {
+                    throw new Error('User not authenticated')
+
+                }
+
+                const updatedUser = await User.findByIdAndUpdate(
+                    context.user._id,
+                    { $pull: { savedBooks: { bookId: bookId } } },
+                    { new: true }
+                ).populate('savedBooks');
+
+                if (!updatedUser) {
+                    throw new Error('User not found')
+                }
+                console.log(updatedUser)
+                return updatedUser;
+
+            } catch (error) {
+                console.error(error);
+                throw new Error('Failed to remove book')
+
+            }
+        }
+
     }
-
-    throw new AuthenticationError('Must be logged in to remove a book')
-
-},
-
-},
-
-};
+}
 
 module.exports = resolvers;

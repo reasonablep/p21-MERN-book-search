@@ -98,7 +98,7 @@ const SearchBooks = () => {
 
       else {
 
-        throw new Error('something went wrong!');
+        throw new Error('Could not save book!');
       }
 
 
