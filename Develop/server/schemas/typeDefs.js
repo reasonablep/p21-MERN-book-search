@@ -25,7 +25,7 @@ type User {
 type Book {
     authors: [String]
     description: String!
-    bookId: String!
+    bookId: ID!
     image: String
     link: String
     title: String!
