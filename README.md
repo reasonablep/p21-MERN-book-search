@@ -23,9 +23,9 @@ Use the search bar on the page to look for books, and create an account or login
 
 ## Screenshots
 
-![Home-Screenshot](./client/src/assets/README/SEARCHED.png)
-![Saved-Screenshot](./client/src/assets/README/SAVED.png)
-![LoggedIn-Screenshot](./client/src/assets/README/LOGGEDIN.png)
+![Home-Screenshot](./Develop/client/src/assets/README/SEARCHED.png)
+![Saved-Screenshot](./Develop/client/src/assets/README/SAVED.png)
+![LoggedIn-Screenshot](./Develop/client/src/assets/README/LOGGEDIN.png)
 
 ## License
 MIT
