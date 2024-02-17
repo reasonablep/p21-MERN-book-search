@@ -8,7 +8,8 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i --production=false",
     "build": "cd client && npm run build",
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install && npm run build",
+    "seed": "node server/config/seeds.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
     "graphql": "^16.8.1",
+    "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
     "nodemon": "^3.0.3"
   }
