@@ -13,7 +13,7 @@ const app = express();
 const server = new ApolloServer ({
   context : authMiddleware,
   typeDefs,
-  resolvers,
+  resolvers
 });
 
 
