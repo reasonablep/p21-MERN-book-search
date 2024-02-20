@@ -29,7 +29,10 @@ const StartApolloServer = async () => {
 
 
 // if we're in production, serve client/build as static assets
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+if (process.env.NODE_ENV === 'production') {
+}
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 db.once('open', () => {
   app.listen(PORT, () => console.log(`🌍 Now listening on http://localhost:${PORT}`));
